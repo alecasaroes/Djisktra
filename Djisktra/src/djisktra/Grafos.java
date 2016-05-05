@@ -14,15 +14,20 @@ public class Grafos {
     }
     
     public void criarGrafo (int numeroDeVertices) {
-        System.out.println("OPERACAO SOLICITADA: Criar Grafo Orientado (Digrafo)");
         this.numeroDeVertices = numeroDeVertices;
         matrizAdjacente = new int [numeroDeVertices][numeroDeVertices];
-        System.out.println("GRAFO ORIENTADO CRIADO COM SUCESSO!\n");
+        for (int i = 0; i < matrizAdjacente.length; i++) {
+            for (int j = 0; j < matrizAdjacente[0].length; j++) {
+                matrizAdjacente[i][j] = -1;
+            }
+        }
+        
+        System.out.println("GRAFO CRIADO COM SUCESSO!\n");
     }
 
-    public void inserirAresta (int verticeOrigem, int verticeDestino) {
+    public void inserirAresta (int verticeOrigem, int verticeDestino, int peso) {
         System.out.println("OPERACAO SOLICITADA: Inserir aresta de v" + verticeOrigem + " à v" + verticeDestino);
-        matrizAdjacente[verticeOrigem-1][verticeDestino-1] = 1;
+        matrizAdjacente[verticeOrigem-1][verticeDestino-1] = peso;
         System.out.println("ARESTA INSERIDA COM SUCESSO!\n");
     }
     
@@ -40,21 +45,19 @@ public class Grafos {
             System.out.println("NÃO EXISTE ARESTA DE v" + verticeOrigem + " à v" + verticeDestino);
     }
     
-    public int [] ListaDeVerticesAdjacenciaAoVertice (int vertice) {
-        int verticesAdjacentes[] = new int[numeroDeVertices];
-        int j = 0;
+    public Fila2 listaDeVerticesAdjacenciaAoVertice (int vertice) {
+        Fila2 listaDeAdjacencia = new Fila2();
         for (int i = 0; i < numeroDeVertices; i++) {
-            if (matrizAdjacente[vertice-1][i] == 1)
-                verticesAdjacentes[j] = matrizAdjacente[vertice-1][i];
-                i++;
+            if (matrizAdjacente[vertice-1][i] > -1)
+                listaDeAdjacencia.push(matrizAdjacente[vertice-1][i]);
         }
-        return verticesAdjacentes;
+        return listaDeAdjacencia;
     }
     
     public void imprimirGrafo () {
         System.out.print("    ");
         for (int k = 0; k < numeroDeVertices; k++) 
-            System.out.print("v" + (k+1) + " ");
+            System.out.print("v" + (k+1) + "  ");
         System.out.println("");
         for (int i = 0; i < matrizAdjacente.length; i++){
             System.out.print("v" + (i+1) + " [ " + matrizAdjacente[i][0]);
