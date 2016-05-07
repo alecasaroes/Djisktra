@@ -49,7 +49,7 @@ public class Grafos {
         Fila2 listaDeAdjacencia = new Fila2();
         for (int i = 0; i < numeroDeVertices; i++) {
             if (matrizAdjacente[vertice-1][i] > -1)
-                listaDeAdjacencia.push(matrizAdjacente[vertice-1][i]);
+                listaDeAdjacencia.push(i+1);
         }
         return listaDeAdjacencia;
     }
@@ -71,6 +71,14 @@ public class Grafos {
 
     public int getNumeroDeVertices () {
         return numeroDeVertices;
+    }
+    
+    public void dijkstra () {
+        
+    }
+    
+    public void relax (int vx, int vy, int wVxVy) {
+        
     }
     
 }
